@@ -5,7 +5,7 @@ int leds[] = {5, 6, 9};
 void setup() {
   for(int thisLed = 0; thisLed < 3; thisLed++) {
     pinMode(leds[thisLed], OUTPUT);
-    analogWrite(leds[thisLed], randomColor());
+    setLed(leds[thisLed], randomColor());
   }
 }
 
@@ -19,7 +19,11 @@ int randomColor() {
 
 void loop() {
   for(int thisLed = 0; thisLed < 3; thisLed++) {
-    analogWrite(leds[thisLed], randomColor());
+    setLed(leds[thisLed], randomColor());
   }
   delay(500); // 500 milliseconds = 0.5 seconds
+}
+
+void setLed(int ledPin, int color) {
+  analogWrite(ledPin, color);    
 }
