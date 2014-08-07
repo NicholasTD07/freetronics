@@ -18,4 +18,8 @@ int randomColor() {
 }
 
 void loop() {
+  for(int thisLed = 0; thisLed < 3; thisLed++) {
+    analogWrite(leds[thisLed], randomColor());
+  }
+  delay(500); // 500 milliseconds = 0.5 seconds
 }
