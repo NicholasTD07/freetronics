@@ -2,10 +2,18 @@ int leds[] = {5, 6, 9};
 // RGB pins.
 // Change this according to your own hardware setting.
 
+int currentValues[3];
+int targetValues[3];
+
 void setup() {
   for(int thisLed = 0; thisLed < 3; thisLed++) {
     pinMode(leds[thisLed], OUTPUT);
-    setLed(leds[thisLed], randomColor());
+
+    int currentValue = randomColor();
+    setLed(leds[thisLed], currentValue);
+
+    currentValues[thisLed] = currentValue;
+    targetValues[thisLed] = randomColor();
   }
 }
 
