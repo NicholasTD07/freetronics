@@ -1,4 +1,4 @@
-int leds[] = {5, 6, 9};
+int ledPins[] = {5, 6, 9};
 // RGB pins.
 // Change this according to your own hardware setting.
 
@@ -6,14 +6,14 @@ int currentValues[3];
 int targetValues[3];
 
 void setup() {
-  for(int thisLed = 0; thisLed < 3; thisLed++) {
-    pinMode(leds[thisLed], OUTPUT);
+  for(int index = 0; index < 3; index++) {
+    pinMode(ledPins[index], OUTPUT);
 
     int currentValue = randomColor();
-    setLed(leds[thisLed], currentValue);
+    setLed(ledPins[index], currentValue);
 
-    currentValues[thisLed] = currentValue;
-    targetValues[thisLed] = randomColor();
+    currentValues[index] = currentValue;
+    targetValues[index] = randomColor();
   }
 }
 
@@ -26,10 +26,14 @@ int randomColor() {
 }
 
 void loop() {
-  for(int thisLed = 0; thisLed < 3; thisLed++) {
-    setLed(leds[thisLed], randomColor());
+  updateAllColorsOnLED(); // Change all three LEDs' color values
+  
+  // Test current colors match target color
+  if (currentColorsAreCloseToTargetColors()) {
+    makeNewTargetColors();
   }
-  delay(500); // 500 milliseconds = 0.5 seconds
+
+  delayForAShortTime();
 }
 
 void setLed(int ledPin, int color) {
