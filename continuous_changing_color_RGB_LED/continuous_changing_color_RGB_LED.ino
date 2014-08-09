@@ -96,11 +96,11 @@ static const int kMultiple = 2;
 */
 bool colorsAreNotClose(int currentValue, int targetValue) {
   if (currentValue < targetValue - kMultiple * kChangeStep) {
-    return false;
+    return true;
   } else if (currentValue > targetValue + kMultiple * kChangeStep) {
-    return false;
+    return true;
   }
-  return true;
+  return false;
 }
 
 void makeNewTargetColors() {
