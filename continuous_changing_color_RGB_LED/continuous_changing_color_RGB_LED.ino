@@ -36,7 +36,19 @@ void loop() {
   delayForAShortTime();
 }
 
-void updateAllColorsOnLED() { }
+void updateAllColorsOnLED() {
+  for(int index = 0; index < 3; index++) {
+    updateLedAtIndex(index);
+  }
+}
+
+void updateLedAtIndex(int index) {
+  if (needsIncreaseValueAtIndex(index)) {
+    increaseLedCurrentValueAtIndex(index);
+  } else {
+    decreaseLedCurrentValueAtIndex(index);
+  }
+}
 
 bool currentColorsAreCloseToTargetColors() {
   for (int index = 0; index < 3; index++) {
