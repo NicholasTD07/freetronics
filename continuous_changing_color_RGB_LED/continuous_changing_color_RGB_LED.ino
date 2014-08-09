@@ -36,6 +36,14 @@ void loop() {
   delayForAShortTime();
 }
 
+void updateAllColorsOnLED() { }
+
+bool currentColorsAreCloseToTargetColors() { }
+
+void makeNewTargetColors() { }
+
+void delayForAShortTime() { }
+
 void setLed(int ledPin, int color) {
   analogWrite(ledPin, color);    
 }
