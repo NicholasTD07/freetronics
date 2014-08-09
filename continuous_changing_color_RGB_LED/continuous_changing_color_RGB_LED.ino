@@ -38,7 +38,31 @@ void loop() {
 
 void updateAllColorsOnLED() { }
 
-bool currentColorsAreCloseToTargetColors() { }
+bool currentColorsAreCloseToTargetColors() {
+  for (int index = 0; index < 3; index++) {
+    if (colorsAreNotClose(currentValues[index], targetValues[index])) {
+      return false;
+    }
+  }
+  return true;
+}
+
+static const int kMultiple = 2;
+static const int kChangeStep = 1;
+
+/*
+  Returns false if currentValue is not in the range of
+  [targetValue - kMultiple * kChangeStep, targetValue + kMultiple * kChangeStep]
+
+*/
+bool colorsAreNotClose(int currentValue, int targetValue) {
+  if (currentValue < targetValue - kMultiple * kChangeStep) {
+    return false;
+  } else if (currentValue > targetValue + kMultiple * kChangeStep) {
+    return false;
+  }
+  return true;
+}
 
 void makeNewTargetColors() { }
 
