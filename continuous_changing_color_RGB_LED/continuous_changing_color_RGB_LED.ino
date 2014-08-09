@@ -64,9 +64,16 @@ bool colorsAreNotClose(int currentValue, int targetValue) {
   return true;
 }
 
-void makeNewTargetColors() { }
+void makeNewTargetColors() {
+  for (int index = 0; index < 3; index++) {
+    targetValues[index] = randomColor();
+  }
+}
 
-void delayForAShortTime() { }
+static const int kDelayTime = 30; // ms
+void delayForAShortTime() {
+  delay(kDelayTime);
+}
 
 void setLed(int ledPin, int color) {
   analogWrite(ledPin, color);    
