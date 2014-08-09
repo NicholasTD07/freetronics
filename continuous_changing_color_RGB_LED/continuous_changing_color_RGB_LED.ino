@@ -17,12 +17,12 @@ void setup() {
   }
 }
 
-static const int K_COLOR_MIN = 0;
-static const int K_COLOR_MAX = 255;
+static const int kColorValueMin = 0;
+static const int kColorValueMax = 255;
 
 // Generate random color value from K_COLOR_MIN, to K_COLOR_MAX.
 int randomColor() {
-  return random(K_COLOR_MIN, K_COLOR_MAX);
+  return random(kColorValueMin, kColorValueMax);
 }
 
 void loop() {
@@ -50,6 +50,34 @@ void updateLedAtIndex(int index) {
   }
 }
 
+bool needsIncreaseValueAtIndex(int index) {
+  return currentValues[index] < targetValues[index];
+}
+
+static const int kChangeStep = 1;
+// This line is moved up
+// from the top of function `colorsAreNotClose`.
+
+void increaseLedCurrentValueAtIndex(int index) {
+  currentValues[index] += kChangeStep;
+  checkCurrentValueAtIndex(index);
+  setLed(ledPins[index], currentValues[index]);
+}
+
+void decreaseLedCurrentValueAtIndex(int index) {
+  currentValues[index] -= kChangeStep;
+  checkCurrentValueAtIndex(index);
+  setLed(ledPins[index], currentValues[index]);
+}
+
+void checkCurrentValueAtIndex(int index) {
+  if (currentValues[index] < kColorValueMin) {
+    currentValues[index] = kColorValueMin;
+  } else if (currentValues[index] > kColorValueMax) {
+    currentValues[index] = kColorValueMax;    
+  }
+}
+
 bool currentColorsAreCloseToTargetColors() {
   for (int index = 0; index < 3; index++) {
     if (colorsAreNotClose(currentValues[index], targetValues[index])) {
@@ -60,7 +88,6 @@ bool currentColorsAreCloseToTargetColors() {
 }
 
 static const int kMultiple = 2;
-static const int kChangeStep = 1;
 
 /*
   Returns false if currentValue is not in the range of
